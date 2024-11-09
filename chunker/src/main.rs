@@ -56,7 +56,7 @@ fn print_progress(percent: f64) {
 fn main() -> Result<(), Error> {
     let args = Args::from_args();
 
-    let serial_device = args.serial_device.unwrap_or({
+    let serial_device = args.serial_device.unwrap_or_else(||{
         let devs: Vec<String> = std::fs::read_dir("/dev/")
             .unwrap()
             .filter_map(|e| {
